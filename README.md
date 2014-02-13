@@ -8,8 +8,8 @@ Giving mori.js underscore like usage patterns.
 that exports the persistent data structures from ClojureScript to the 
 host Javascript environment. 
 
-As much as I love it I find that if I need to use it a lot in
-javascript my JavaScript code becomes pretty hard to read.
+As much as I love it, I find that if I use it a lot, my JavaScript
+code becomes pretty hard to read.
 
 Nested calls start to look horrendous.
 
@@ -21,7 +21,7 @@ mori.last(mori.map(mori.inc, mori.map(mori.inc, mori.vector(1,2,3,4))))
 
 That looks pretty bad to me.
 
-`mori.pipeline` helps a bit.
+The mori function `pipeline` helps a bit.
 
 ```javascript
 
@@ -29,7 +29,6 @@ mori.pipeline(mori.vector(1,2,3,4),
               mori.partial(mori.map, mori.inc), 
               mori.partial(mori.map, mori.inc),
               mori.last) 
-
 ```
 
 But in a JavaScript environment where developers are quite accustomed
