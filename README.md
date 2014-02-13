@@ -2,16 +2,58 @@
 
 Giving mori.js underscore like usage patterns.
 
+## Description
+
+[Mori](https://github.com/swannodette/mori) is an incredible library
+that exports the persistent data structures from ClojureScript to the 
+host Javascript environment. 
+
+As much as I love it I find that if I need to use it a lot in
+javascript my JavaScript code becomes pretty hard to read.
+
+Nested calls start to look horrendous.
+
+```javascript
+
+mori.last(mori.map(mori.inc, mori.map(mori.inc, mori.vector(1,2,3,4))))
+
+```
+
+That looks pretty bad to me.
+
+`mori.pipeline` helps a bit.
+
+```javascript
+
+mori.pipeline(mori.vector(1,2,3,4),
+              mori.partial(mori.map, mori.inc), 
+              mori.partial(mori.map, mori.inc),
+              mori.last) 
+
+```
+
+But in a JavaScript environment where developers are quite accustomed
+to thinking in terms of chaining I think the following expression of
+the same thing would be pretty helpful.
+
+```javascript
+
+m$([1,2,3,4]).map(mori.inc).map(mori.inc).last().value()
+
+```
+
 ## Usage
 
-Just grab the `moriscore.js` script from the resources directory and
-include it in your project.
+MoriScore depends on you already having mori included in your project.
+
+After you have obtained mori just grab the `moriscore.js` script from
+the `resources` directory and include it in your project.
 
 ## Examples
 
 ### OOP like usage
 
-You can wrap a mori data stucture so that you can call the various
+You can wrap a mori data structure so that you can call the various
 mori operations on it.
 
 ```javascript
@@ -28,7 +70,7 @@ m_(m_.hash_map({first: "John", last: "Doe"})).assoc("middle", "A")
 ```
 
 This works in the same way that it works in underscore.js. The call to
-the wrapper will return the raw Mori datastructure. If you want to
+the wrapper will return the raw Mori data structure. If you want to
 operate on the new value you have to wrap it again.
 
 ### Chaining
@@ -56,7 +98,7 @@ m$({first: "John", last: "Jackson"}).assoc("middle", "A").assoc("birthday", Date
 
 You can create wrapped Mori data structures from native javascript
 structures by simply passing javascript structures into the `m_`
-function. The javascript strutures are coerced with the mori function
+function. The javascript structures are coerced with the mori function
 `js_to_clj`.
 
 ```javascript
