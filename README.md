@@ -25,7 +25,7 @@ m_(m_.vector(1,2,3,4)).map(m_.inc) //=> mori vector [2 3 4 5]
 m_(m_.hash_map({first: "John", last: "Doe"})).assoc("middle", "A")
 //=> { :first "John" :last "Doe" :middle "A"}
 
-```javascript
+```
 
 This works in the same way that it works in underscore.js. The call to
 the wrapper will return the raw Mori datastructure. If you want to
